@@ -12,18 +12,44 @@ def _get_omega_pin(pin: int):
     return gpio
 
 
-def set_led_red_off():
+def _led_on(pin: int):
     t1 = time.time()
-    gp = _get_omega_pin(LED_RED_PIN)
+    gp = _get_omega_pin(pin)
     gp.setValue(1)
     t2 = time.time()
     print(t2-t1)
 
 
-def set_led_red_on():
+def _led_off(pin: int):
     t1 = time.time()
-    gp = _get_omega_pin(LED_RED_PIN)
+    gp = _get_omega_pin(pin)
     gp.setValue(0)
     t2 = time.time()
     print(t2-t1)
+
+
+def set_led_red_off():
+    _led_off(LED_RED_PIN)
+
+
+def set_led_red_on():
+    _led_on(LED_RED_PIN)
+
+
+def set_led_green_off():
+    _led_off(LED_GREEN_PIN)
+
+
+def set_led_green_on():
+    _led_on(LED_GREEN_PIN)
+
+
+def set_led_blue_off():
+    _led_off(LED_BLUE_PIN)
+
+
+def set_led_blue_on():
+    _led_on(LED_BLUE_PIN)
+
+
 

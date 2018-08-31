@@ -7,9 +7,9 @@ from flask import jsonify
 from multiprocessing import Process, Lock
 
 if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_DUMMY":
-    from .dummy_dev import set_led_red_off, set_led_red_on
+    import dummy_dev as tree_dev
 if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_DOCK_RGBLED":
-    from .omega_dock import set_led_red_off, set_led_red_on
+    import omega_dock as tree_dev
 
 left_tree_lock = Lock()
 
@@ -53,11 +53,31 @@ def detached_start_sequence(start_at: float):
     time.sleep(1)
     print("Start detached in 1")
     time.sleep(1)
-    print("Start!!")
-    set_led_red_on()
-    time.sleep(1)
-    set_led_red_off()
+    print("Ready!!")
 
+    tree_dev.set_led_red_on()
+    tree_dev.set_led_green_off()
+    tree_dev.set_led_blue_off()
+    time.sleep(1)
+
+    print("On your marks!!")
+    tree_dev.set_led_red_on()
+    tree_dev.set_led_green_on()
+    tree_dev.set_led_blue_off()
+    time.sleep(1)
+
+    print("Get set!!")
+    tree_dev.set_led_red_on()
+    tree_dev.set_led_green_on()
+    tree_dev.set_led_blue_on()
+    time.sleep(1)
+
+    print("GO !!")
+    tree_dev.set_led_red_off()
+    tree_dev.set_led_green_on()
+    tree_dev.set_led_blue_off()
+
+    print("(start sequence done)")
     left_tree_lock.release()
 
 
