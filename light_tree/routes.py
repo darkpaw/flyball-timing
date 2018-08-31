@@ -12,6 +12,23 @@ if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_DOCK_RGBLED":
     from .omega_dock_dev import DockRGBLightTreeDev as LightTreeDev
 
 left_tree_lock = Lock()
+left_tree_device = LightTreeDev()
+
+left_tree_device.set_led_red_off()
+left_tree_device.set_led_blue_off()
+left_tree_device.set_led_green_on()
+
+left_tree_device.set_led_red_on()
+left_tree_device.set_led_blue_off()
+left_tree_device.set_led_green_on()
+
+left_tree_device.set_led_red_off()
+left_tree_device.set_led_blue_on()
+left_tree_device.set_led_green_on()
+
+left_tree_device.set_led_red_on()
+left_tree_device.set_led_blue_off()
+left_tree_device.set_led_green_off()
 
 
 @app.route('/')
@@ -46,7 +63,7 @@ def set_stopped_now():
         print("Failed to acquire lock...")
         return False
 
-    tree_dev = LightTreeDev()
+    tree_dev = left_tree_device
     tree_dev.set_led_red_on()
     tree_dev.set_led_green_off()
     tree_dev.set_led_blue_off()
@@ -61,7 +78,7 @@ def detached_start_sequence(start_at: float):
     if not got_lock:
         print("Failed to acquire lock...")
 
-    tree_dev = LightTreeDev()
+    tree_dev = left_tree_device  # LightTreeDev()
 
     t = time.time()
     print("Start detached in 3")
