@@ -39,12 +39,27 @@ def local_time():
     return jsonify(rt)
 
 
+def set_stopped_now():
+
+    got_lock = left_tree_lock.acquire(block=False)
+    if not got_lock:
+        print("Failed to acquire lock...")
+        return False
+
+    tree_dev = LightTreeDev()
+    tree_dev.set_led_red_on()
+    tree_dev.set_led_green_off()
+    tree_dev.set_led_blue_off()
+    print("(stopped)")
+    left_tree_lock.release()
+    return True
+
+
 def detached_start_sequence(start_at: float):
 
     got_lock = left_tree_lock.acquire(block=False)
     if not got_lock:
         print("Failed to acquire lock...")
-        return
 
     tree_dev = LightTreeDev()
 
@@ -55,8 +70,8 @@ def detached_start_sequence(start_at: float):
     time.sleep(1)
     print("Start detached in 1")
     time.sleep(1)
-    print("Ready!!")
 
+    print("Ready!!")
     tree_dev.set_led_red_on()
     tree_dev.set_led_green_off()
     tree_dev.set_led_blue_off()
@@ -95,11 +110,24 @@ def start():
         success = False
 
     t = time.time()
-    print(arrow.get(t))
 
     rt = response_template()
+    rt["command"] = "start"
     rt["device_time"] = str(arrow.get(t))
     rt["status"] = "success" if success else "failed"
 
     return jsonify(rt)
 
+
+@app.route('/stop')
+def stop():
+
+    t = time.time()
+    success = set_stopped_now()
+
+    rt = response_template()
+    rt["command"] = "stop"
+    rt["device_time"] = str(arrow.get(t))
+    rt["status"] = "success" if success else "failed"
+
+    return jsonify(rt)

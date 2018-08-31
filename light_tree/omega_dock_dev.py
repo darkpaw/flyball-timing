@@ -16,14 +16,14 @@ class DockRGBLightTreeDev(object):
     def _led_on(self, pin: int):
         t1 = time.time()
         gp = self._get_omega_pin(pin)
-        gp.setValue(1)
+        gp.setValue(0)
         t2 = time.time()
         print(t2-t1)
 
     def _led_off(self, pin: int):
         t1 = time.time()
         gp = self._get_omega_pin(pin)
-        gp.setValue(0)
+        gp.setValue(1)
         t2 = time.time()
         print(t2-t1)
 
