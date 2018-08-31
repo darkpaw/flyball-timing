@@ -1,0 +1,12 @@
+
+class Conf(object):
+    pass
+
+
+conf = Conf()
+
+# TREE_DEV_OMEGA_DOCK_RGBLED
+# TREE_DEV_DUMMY
+
+conf.LEFT_TREE_DEV_TYPE = "TREE_DEV_OMEGA_DOCK_RGBLED"
+conf.RIGHT_TREE_DEV_TYPE = "TREE_DEV_OMEGA_DOCK_RGBLED"
