@@ -1,6 +1,41 @@
 import time
 
 
+class DummyLightTreeDev(object):
+
+    def _led_on(self, pin: str):
+        t1 = time.time()
+        print("%s ON" % pin)
+        t2 = time.time()
+        print(t2-t1)
+
+    def _led_off(self, pin: str):
+        t1 = time.time()
+        print("%s OFF" % pin)
+        t2 = time.time()
+        print(t2-t1)
+
+    def set_led_red_off(self):
+        self._led_off("RED")
+
+    def set_led_red_on(self):
+        self._led_on("RED")
+
+    def set_led_green_off(self):
+        self._led_off("GREEN")
+
+    def set_led_green_on(self):
+        self._led_on("GREEN")
+
+    def set_led_blue_off(self):
+        self._led_off("BLUE")
+
+    def set_led_blue_on(self):
+        self._led_on("BLUE")
+
+
+
+
 def set_led_red_off():
     t1 = time.time()
     print("RED OFF")

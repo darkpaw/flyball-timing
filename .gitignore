@@ -1,6 +1,7 @@
 .idea
 venv
 settings.py
+onionGpio.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

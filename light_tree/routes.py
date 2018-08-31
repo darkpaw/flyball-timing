@@ -7,9 +7,9 @@ from flask import jsonify
 from multiprocessing import Process, Lock
 
 if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_DUMMY":
-    import dummy_dev as tree_dev
+    from .dummy_dev import DummyLightTreeDev as LightTreeDev
 if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_DOCK_RGBLED":
-    import omega_dock as tree_dev
+    from .omega_dock_dev import DockRGBLightTreeDev as LightTreeDev
 
 left_tree_lock = Lock()
 
@@ -45,6 +45,8 @@ def detached_start_sequence(start_at: float):
     if not got_lock:
         print("Failed to acquire lock...")
         return
+
+    tree_dev = LightTreeDev()
 
     t = time.time()
     print("Start detached in 3")
