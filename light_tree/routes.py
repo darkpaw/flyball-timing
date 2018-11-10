@@ -40,6 +40,7 @@ def index():
     rt["time"] = str(t)
     rt["code"] = "https://github.com/darkpaw/flyball-timing"
     rt["version"] = "0.1"
+    rt["commands"] = ["local_time", "start", "stop"]
 
     return jsonify(rt)
 
@@ -78,15 +79,22 @@ def detached_start_sequence(start_at: float):
     if not got_lock:
         print("Failed to acquire lock...")
 
+    time_diff = start_at - time.time()
+
+    if time_diff > 0:
+        print("Sleeping until:", start_at)
+        time.sleep(time_diff)
+
+
     tree_dev = left_tree_device  # LightTreeDev()
 
-    t = time.time()
-    print("Start detached in 3")
-    time.sleep(1)
-    print("Start detached in 2")
-    time.sleep(1)
-    print("Start detached in 1")
-    time.sleep(1)
+    # t = time.time()
+    # print("Start detached in 3")
+    # time.sleep(1)
+    # print("Start detached in 2")
+    # time.sleep(1)
+    # print("Start detached in 1")
+    # time.sleep(1)
 
     print("Ready!!")
     tree_dev.set_led_red_on()
@@ -120,7 +128,9 @@ def start():
 
     try:
         global p
-        p = Process(target=detached_start_sequence, args=(time.time(),))
+        start_time = time.time() + 5.0
+        print("Requesting start at %0.4f" % start_time)
+        p = Process(target=detached_start_sequence, args=(start_time,))
         p.start()
         success = True
     except Exception as e:
