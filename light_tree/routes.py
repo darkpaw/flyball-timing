@@ -73,6 +73,22 @@ def set_stopped_now():
     return True
 
 
+def set_ready_now():
+
+    got_lock = left_tree_lock.acquire(block=False)
+    if not got_lock:
+        print("Failed to acquire lock...")
+        return False
+
+    tree_dev = left_tree_device
+    tree_dev.set_led_red_off()
+    tree_dev.set_led_green_off()
+    tree_dev.set_led_blue_off()
+    print("(ready)")
+    left_tree_lock.release()
+    return True
+
+
 def detached_start_sequence(start_at: float):
 
     got_lock = left_tree_lock.acquire(block=False)
@@ -96,28 +112,34 @@ def detached_start_sequence(start_at: float):
     # print("Start detached in 1")
     # time.sleep(1)
 
-    print("Ready!!")
+    print("Wait!!")
     tree_dev.set_led_red_on()
     tree_dev.set_led_green_off()
     tree_dev.set_led_blue_off()
     time.sleep(1)
 
+    print("Ready!!")
+    tree_dev.set_led_red_off()
+    tree_dev.set_led_green_off()
+    tree_dev.set_led_blue_on()
+    time.sleep(1)
+
     print("On your marks!!")
-    tree_dev.set_led_red_on()
+    tree_dev.set_led_red_off()
     tree_dev.set_led_green_on()
     tree_dev.set_led_blue_off()
     time.sleep(1)
 
     print("Get set!!")
-    tree_dev.set_led_red_on()
+    tree_dev.set_led_red_off()
     tree_dev.set_led_green_on()
     tree_dev.set_led_blue_on()
     time.sleep(1)
 
     print("GO !!")
     tree_dev.set_led_red_off()
-    tree_dev.set_led_green_on()
-    tree_dev.set_led_blue_off()
+    tree_dev.set_led_green_off()
+    tree_dev.set_led_blue_on()
 
     print("(start sequence done)")
     left_tree_lock.release()
@@ -154,6 +176,20 @@ def stop():
 
     rt = response_template()
     rt["command"] = "stop"
+    rt["device_time"] = str(arrow.get(t))
+    rt["status"] = "success" if success else "failed"
+
+    return jsonify(rt)
+
+
+@app.route('/ready')
+def stop():
+
+    t = time.time()
+    success = set_ready_now()
+
+    rt = response_template()
+    rt["command"] = "ready"
     rt["device_time"] = str(arrow.get(t))
     rt["status"] = "success" if success else "failed"
 
