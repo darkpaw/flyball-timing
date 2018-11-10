@@ -11,7 +11,7 @@ if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_DUMMY":
 if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_DOCK_RGBLED":    # TODO fix, broken by removal of blue led?
     from .omega_dock_dev import DockRGBLightTreeDev as LightTreeDev
 if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_FIVE_LEDS":
-    from .omega_dock_dev import DockRGBLightTreeDev as LightTreeDev
+    from .five_led_light_tree_dev import FiveLedDLightTreeDev as LightTreeDev
 
 left_tree_lock = Lock()
 left_tree_device = LightTreeDev()
