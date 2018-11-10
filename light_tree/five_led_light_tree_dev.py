@@ -19,7 +19,7 @@ class FiveLedDLightTreeDev(object):
         print("pin %d on" % pin)
         t1 = time.time()
         gp = self._get_omega_pin(pin)
-        gp.setValue(0)
+        gp.setValue(1)
         t2 = time.time()
         print(t2-t1)
 
@@ -27,7 +27,7 @@ class FiveLedDLightTreeDev(object):
         print("pin %d off" % pin)
         t1 = time.time()
         gp = self._get_omega_pin(pin)
-        gp.setValue(1)
+        gp.setValue(0)
         t2 = time.time()
         print(t2-t1)
 
