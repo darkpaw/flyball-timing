@@ -183,7 +183,7 @@ def stop():
 
 
 @app.route('/ready')
-def stop():
+def ready():
 
     t = time.time()
     success = set_ready_now()
