@@ -16,6 +16,7 @@ class FiveLedDLightTreeDev(object):
         return gpio
 
     def _led_on(self, pin: int):
+        print("pin %d on" % pin)
         t1 = time.time()
         gp = self._get_omega_pin(pin)
         gp.setValue(0)
@@ -23,6 +24,7 @@ class FiveLedDLightTreeDev(object):
         print(t2-t1)
 
     def _led_off(self, pin: int):
+        print("pin %d off" % pin)
         t1 = time.time()
         gp = self._get_omega_pin(pin)
         gp.setValue(1)
