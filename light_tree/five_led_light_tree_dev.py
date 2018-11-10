@@ -1,11 +1,11 @@
 from .onionGpio import OnionGpio
 import time
 
-LED_RED_PIN = 1
-LED_ORANGE_1_PIN = 6
-LED_ORANGE_2_PIN = 7
-LED_ORANGE_3_PIN = 8
-LED_GREEN_PIN = 9
+LED_RED_PIN = 0
+LED_ORANGE_1_PIN = 1
+LED_ORANGE_2_PIN = 2
+LED_ORANGE_3_PIN = 3
+LED_GREEN_PIN = 18
 
 
 class FiveLedDLightTreeDev(object):
