@@ -27,27 +27,24 @@ class DummyLightTreeDev(object):
     def set_led_green_on(self):
         self._led_on("GREEN")
 
-    def set_led_blue_off(self):
-        self._led_off("BLUE")
+    def set_led_orange_1_off(self):
+        self._led_off("ORANGE_1")
 
-    def set_led_blue_on(self):
-        self._led_on("BLUE")
+    def set_led_orange_1_on(self):
+        self._led_on("ORANGE_1")
 
+    def set_led_orange_2_off(self):
+        self._led_off("ORANGE_2")
 
+    def set_led_orange_2_on(self):
+        self._led_on("ORANGE_2")
 
+    def set_led_orange_3_off(self):
+        self._led_off("ORANGE_3")
 
-def set_led_red_off():
-    t1 = time.time()
-    print("RED OFF")
-    t2 = time.time()
-    print(t2-t1)
+    def set_led_orange_3_on(self):
+        self._led_on("ORANGE_3")
 
-
-def set_led_red_on():
-    t1 = time.time()
-    print("RED ON")
-    t2 = time.time()
-    print(t2-t1)
     # omega.get_pin(5)  # returns 1
     # omega.pin_off(5)
 

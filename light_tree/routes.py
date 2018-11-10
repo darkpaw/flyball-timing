@@ -8,27 +8,31 @@ from multiprocessing import Process, Lock
 
 if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_DUMMY":
     from .dummy_dev import DummyLightTreeDev as LightTreeDev
-if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_DOCK_RGBLED":
+if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_DOCK_RGBLED":    # TODO fix, broken by removal of blue led?
+    from .omega_dock_dev import DockRGBLightTreeDev as LightTreeDev
+if conf.LEFT_TREE_DEV_TYPE == "TREE_DEV_OMEGA_FIVE_LEDS":
     from .omega_dock_dev import DockRGBLightTreeDev as LightTreeDev
 
 left_tree_lock = Lock()
 left_tree_device = LightTreeDev()
 
 left_tree_device.set_led_red_off()
-left_tree_device.set_led_blue_off()
+# left_tree_device.set_led_blue_off()
 left_tree_device.set_led_green_on()
 
 left_tree_device.set_led_red_on()
-left_tree_device.set_led_blue_off()
+# left_tree_device.set_led_blue_off()
 left_tree_device.set_led_green_on()
 
 left_tree_device.set_led_red_off()
-left_tree_device.set_led_blue_on()
+# left_tree_device.set_led_blue_on()
 left_tree_device.set_led_green_on()
 
 left_tree_device.set_led_red_on()
-left_tree_device.set_led_blue_off()
+# left_tree_device.set_led_blue_off()
 left_tree_device.set_led_green_off()
+
+left_tree_device.set_led_red_off()
 
 
 @app.route('/')
@@ -66,8 +70,11 @@ def set_stopped_now():
 
     tree_dev = left_tree_device
     tree_dev.set_led_red_on()
+    tree_dev.set_led_orange_1_off()
+    tree_dev.set_led_orange_2_off()
+    tree_dev.set_led_orange_3_off()
     tree_dev.set_led_green_off()
-    tree_dev.set_led_blue_off()
+
     print("(stopped)")
     left_tree_lock.release()
     return True
@@ -82,8 +89,10 @@ def set_ready_now():
 
     tree_dev = left_tree_device
     tree_dev.set_led_red_off()
+    tree_dev.set_led_orange_1_off()
+    tree_dev.set_led_orange_2_off()
+    tree_dev.set_led_orange_3_off()
     tree_dev.set_led_green_off()
-    tree_dev.set_led_blue_off()
     print("(ready)")
     left_tree_lock.release()
     return True
@@ -114,32 +123,30 @@ def detached_start_sequence(start_at: float):
 
     print("Wait!!")
     tree_dev.set_led_red_on()
+    tree_dev.set_led_orange_1_off()
+    tree_dev.set_led_orange_2_off()
+    tree_dev.set_led_orange_3_off()
     tree_dev.set_led_green_off()
-    tree_dev.set_led_blue_off()
     time.sleep(1)
 
     print("Ready!!")
     tree_dev.set_led_red_off()
-    tree_dev.set_led_green_off()
-    tree_dev.set_led_blue_on()
+    tree_dev.set_led_orange_1_on()
     time.sleep(1)
 
     print("On your marks!!")
-    tree_dev.set_led_red_off()
-    tree_dev.set_led_green_on()
-    tree_dev.set_led_blue_off()
+    tree_dev.set_led_orange_1_off()
+    tree_dev.set_led_orange_2_on()
     time.sleep(1)
 
     print("Get set!!")
-    tree_dev.set_led_red_off()
-    tree_dev.set_led_green_on()
-    tree_dev.set_led_blue_on()
+    tree_dev.set_led_orange_2_off()
+    tree_dev.set_led_orange_3_on()
     time.sleep(1)
 
     print("GO !!")
-    tree_dev.set_led_red_off()
-    tree_dev.set_led_green_off()
-    tree_dev.set_led_blue_on()
+    tree_dev.set_led_orange_3_off()
+    tree_dev.set_led_green_on()
 
     print("(start sequence done)")
     left_tree_lock.release()
