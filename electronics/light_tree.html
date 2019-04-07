@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Light Tree</title>
+</head>
+<body>
+
+<h4>Electronic Components</h4>
+
+1 * Onion Omega 2+
+
+1 * Onion Omega Expansion Dock
+
+5 * SparkFun MOSFET module COM-12959
+
+4 * 18650 Li-ion batteries
+
+5 * 3W LED
+
+5 * 2.0 Ohm 1W resistors (current limiting for LEDs)
+
+LED - 3W Aluminum PCB (5 Pack, Warm White)
+https://www.sparkfun.com/products/13104
+
+
+TODO **Li-ion battery protection module**
+
+
+
+<img src="schematic_001.png"/>
+
+<h4>Software</h4>
+
+opkg modules from the Onion repository:
+
+python3
+python3-pip ?
+
+opkg modules from the open-wrt repository:
+
+chrony
+
+Python modules via pip:
+
+
+
+<h4>Build</h4>
+
+
+References:
+
+https://www.nutsvolts.com/magazine/article/calculating_current
+https://arduinodiy.wordpress.com/2012/05/02/using-mosfets-with-ttl-levels/
+LED https://www.sparkfun.com/products/13104
+
+Vf = 3.2 - 3.8 V
+If = 750mA
+
+Vbatt = 4.2 V
+
+Vbatt - Vled = 1000 mV
+Iled = 750 mA
+
+1.333 Ohm ?
+
+https://www.youtube.com/watch?v=rib9GeZvjU4
+
+7 Tricks on how to wire your Project (e.g. Arduino, ESP8266, ESP32)
+https://www.youtube.com/watch?v=uYf7vFREV98
+
+
+</body>
+</html>

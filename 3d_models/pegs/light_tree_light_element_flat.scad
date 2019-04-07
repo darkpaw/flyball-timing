@@ -3,10 +3,13 @@ pipe_id = 56.0;
 pipe_length = 660.0;
 
 base_height = 5;
-element_length = 60 + base_height;
+element_length = 75 + base_height;
 
 front_aperture_width = 40;
 rounded = 2;
+
+
+
 
 
 module aluminium_t_piece() {
@@ -31,6 +34,39 @@ module peg() {
     cylinder(r1=5, r2=4, h=5, $fn=36);
   
 }    
+
+
+
+module flat_element_2d() {
+    
+    union(){
+        polygon([-element_length
+        
+    }
+    
+    
+}
+
+
+
+module flat_element_body() {
+
+
+    difference(){
+
+        translate([-element_length / 2, 0,0])
+            rotate([0,90,0])
+                cylinder(r=pipe_id/2 - 2, h=element_length, $fn=240);
+    
+        
+        union(){
+            translate([0,0, - pipe_id /2])
+                cube([element_length+4, pipe_id * 2, pipe_id], center=true); 
+            
+        }
+    }
+    
+}
 
 
 module element_body() {
@@ -124,20 +160,24 @@ module led_element() {
 }
 
 
-led_element();
+// led_element();
+
+flat_element_body();
 
 //    
 ////translate([0,120,5])
 ////    peg();
 //
 
-
-//translate([-10,3.1,6])
-//    aluminium_t_piece();                         
-//translate([-15,-20,45])
-//    mosfet_breakout();
-//translate([0, 0, -30])
-//    %cylinder(r=pipe_id/2.0, h=120, $fn=120);
+// translate([0,0,+pipe_id/2])
+    rotate([0,-90,0]){
+//        translate([-10,3.1,6])
+//            aluminium_t_piece();                         
+//        translate([-15,-20,45])
+//            mosfet_breakout();
+        translate([0, 0, -30])
+            %cylinder(r=pipe_id/2.0, h=120, $fn=120);
+    }
 
     
     
